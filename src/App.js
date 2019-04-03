@@ -1,26 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Suspense } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 import './App.css';
+import { toast } from 'react-toastify';
+
+const Login = React.lazy(() => import('./components/Auth/Login/LoginContainer'));
+const Register = React.lazy(() => import('./components/Auth/Register/RegisterContainer'));
+const MainLayout = React.lazy(() => import('./components/Layout/MainLayout'));
+
+toast.configure({
+  autoClose: 5000,
+  draggable: false
+});
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route path='/' component={MainLayout} />
+          </Suspense>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
