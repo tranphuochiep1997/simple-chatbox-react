@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routes from '../../routes';
 import AppHeader from './AppHeader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logout } from '../Auth/AuthAction';
+import { Container } from 'reactstrap';
+
+const Loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
 const MainLayout = (props) => {
 
@@ -17,17 +20,23 @@ const MainLayout = (props) => {
   return (
     <React.Fragment>
       <AppHeader onLogout={onLogout} user={props.user} />
-      <Switch>
-        {
-          routes.map((route, index) => {
-            if (route.component) {
-              return <Route key={index} exact={route.exact} path={route.path} component={route.component} />;
-            }
+      <main className='main'>
+        <Container fluid>
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              {
+                routes.map((route, index) => {
+                  if (route.component) {
+                    return <Route key={index} exact={route.exact} path={route.path} component={route.component} />;
+                  }
 
-            return null;
-          })
-        }
-      </Switch>
+                  return null;
+                })
+              }
+            </Switch>
+          </Suspense>
+        </Container>
+      </main>
     </React.Fragment>
   );
 }
