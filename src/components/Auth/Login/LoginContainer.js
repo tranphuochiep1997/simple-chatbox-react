@@ -1,16 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginForm from './LoginForm';
 import AuthLayout from '../AuthLayout';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, clearLoginError } from './LoginAction';
+import { Redirect } from 'react-router-dom';
 
 const LoginContainer = (props) => {
+
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
   useEffect(() => {
-    if (!props.loading && props.success) {
-      props.history.push('/');
+    if (!props.loading && !props.authenticateError && props.success) {
+      setRedirectToReferrer(true);
     }
   }, [props.loading, props.success]);
+
+  const { from } = props.location.state || { from: { pathname: '/' } };
+
+  if (redirectToReferrer) {
+    return <Redirect to={from} />
+  }
 
   return (
     <AuthLayout errorMessage={props.error}>
@@ -28,7 +38,8 @@ const mapStateToProps = state => {
   return {
     loading: state.loginReducer.loading,
     error: state.loginReducer.error,
-    success: state.loginReducer.success
+    success: state.loginReducer.success,
+    authenticateError: state.authReducer.error
   }
 };
 

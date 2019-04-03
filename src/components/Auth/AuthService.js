@@ -26,6 +26,15 @@ const AuthService = {
     } catch (e) {
       throw e;
     }
+  },
+
+  async getCurrentUserInfo() {
+    try {
+      const response = await axios.get('/users/me');
+      return response.data;
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
