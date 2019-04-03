@@ -24,13 +24,14 @@ export const clearRegisterError = () => {
 
 export const register = ({ username, password, confirmPassword }) => {
   return async dispatch => {
-    dispatch(registerDoing());
 
     if (password !== confirmPassword) {
       return dispatch(registerFail({
         message: 'PASSWORD_NOT_MATCH'
-      }))
+      }));
     }
+
+    dispatch(registerDoing());
 
     return AuthService.register({ username, password })
       .then(response => {

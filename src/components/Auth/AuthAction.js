@@ -35,3 +35,9 @@ export const authenticate = () => {
       })
   }
 }
+
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const logout = () => {
+  Storage.clear();
+  return { type: LOGOUT_SUCCESS }
+}

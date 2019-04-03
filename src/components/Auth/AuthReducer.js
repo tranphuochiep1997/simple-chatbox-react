@@ -1,6 +1,7 @@
-import { 
-  AUTHENTICATE_FAILURE, 
-  AUTHENTICATE_SUCCESS
+import {
+  AUTHENTICATE_FAILURE,
+  AUTHENTICATE_SUCCESS,
+  LOGOUT_SUCCESS
 } from './AuthAction';
 
 const initialState = {
@@ -28,6 +29,10 @@ const authReducer = (state = initialState, action = {}) => {
         authenticated: false,
         error: action.error.message
       }
+    }
+
+    case LOGOUT_SUCCESS: {
+      return initialState;
     }
 
     default:

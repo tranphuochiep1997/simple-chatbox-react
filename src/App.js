@@ -36,7 +36,7 @@ class App extends Component {
           <Route exact path='/register' component={Register} />
           <PrivateRoute path='/' component={MainLayout} />
         </Switch>
-        <ToastContainer draggable={false}/>
+        <ToastContainer draggable={false} />
       </BrowserRouter>
     );
   }

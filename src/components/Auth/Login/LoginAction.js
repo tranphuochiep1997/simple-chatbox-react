@@ -19,11 +19,6 @@ const loginDoing = () => {
   return { type: LOGIN_DOING }
 }
 
-export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';
-export const clearLoginError = () => {
-  return { type: CLEAR_LOGIN_ERROR }
-}
-
 export const login = ({ username, password }) => {
   return async dispatch => {
 
@@ -38,4 +33,9 @@ export const login = ({ username, password }) => {
         return dispatch(loginFail(response.error));
       })
   }
+}
+
+export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';
+export const clearLoginError = () => {
+  return { type: CLEAR_LOGIN_ERROR }
 }

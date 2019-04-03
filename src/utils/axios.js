@@ -2,11 +2,21 @@ import axios from 'axios';
 import { SERVER_API } from './config';
 import Storage from './storage';
 
-export default axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': Storage.getAccessToken()
-  },
-  baseURL: SERVER_API
+axios.defaults.baseURL = SERVER_API;
+axios.defaults.headers['Content-Type'] = 'application/json'
+
+/** Bind accessToken */
+axios.interceptors.request.use(function (config) {
+  const accessToken = Storage.getAccessToken();
+  if (accessToken) {
+    config.headers['Authorization'] = Storage.getAccessToken()
+  }
+
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
 });
+
+export default axios;
 

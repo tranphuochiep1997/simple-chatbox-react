@@ -11,7 +11,7 @@ const LoginContainer = (props) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
   useEffect(() => {
-    if (!props.loading && !props.authenticateError && props.success) {
+    if (!props.loading && !props.authenticatedError && props.success) {
       setRedirectToReferrer(true);
     }
   }, [props.loading, props.success]);
@@ -24,9 +24,9 @@ const LoginContainer = (props) => {
 
   return (
     <AuthLayout errorMessage={props.error}>
-      <LoginForm 
-        login={props.login} 
-        loading={props.loading} 
+      <LoginForm
+        login={props.login}
+        loading={props.loading}
         success={props.success}
         error={props.error}
         clearLoginError={props.clearLoginError} />
@@ -38,8 +38,8 @@ const mapStateToProps = state => {
   return {
     loading: state.loginReducer.loading,
     error: state.loginReducer.error,
-    success: state.loginReducer.success,
-    authenticateError: state.authReducer.error
+    authenticatedError: state.authReducer.error,
+    success: state.loginReducer.success
   }
 };
 

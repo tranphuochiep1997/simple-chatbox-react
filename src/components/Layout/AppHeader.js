@@ -13,15 +13,11 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-const AppHeader = () => {
+const AppHeader = ({ onLogout, user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
     setIsOpen(isOpen => !isOpen);
-  }
-
-  const logout = () => {
-    alert('Hello')
   }
 
   return (
@@ -31,17 +27,14 @@ const AppHeader = () => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink href="/components/">Components</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+            <NavLink>Hello {user.username}</NavLink>
           </NavItem>
           <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret>
               Options
                 </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem onClick={logout}>
+              <DropdownItem onClick={onLogout}>
                 Logout
               </DropdownItem>
             </DropdownMenu>
