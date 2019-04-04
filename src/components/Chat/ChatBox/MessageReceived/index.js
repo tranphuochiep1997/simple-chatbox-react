@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 
-const MessageReceived = (props) => {
+const MessageReceived = ({ username, message }) => {
   return (
     <div>
       <Row>
         <Col >
-          <span className='text-muted pl-2'>username</span>
+          <span className='text-muted pl-2'>{ username }</span>
         </Col>
       </Row >
       <Row >
