@@ -1,6 +1,5 @@
 import {
   MESSAGE_RECEIVED,
-  SEND_MESSAGE,
   GET_LIST_MESSAGES_SUCCESS,
   GET_LIST_MESSAGES_DOING,
   GET_LIST_MESSAGES_FAILURE
@@ -17,14 +16,7 @@ const chatReducer = (state = initialState, action = {}) => {
     case MESSAGE_RECEIVED: {
       return {
         ...state,
-        messages: [action.payload, ...state.messages]
-      }
-    }
-
-    case SEND_MESSAGE: {
-      return {
-        ...state,
-        messages: [action.payload, ...state.messages]
+        messages: [...state.messages, action.payload]
       }
     }
 

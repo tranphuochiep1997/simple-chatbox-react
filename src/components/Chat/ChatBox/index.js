@@ -2,12 +2,13 @@ import React from 'react';
 import FormInput from './FormInput';
 import Title from './Title';
 import MessageList from './MessageList';
+import './index.css';
 
-const ChatBox = ({ messages, loading, sendMessage }) => {
+const ChatBox = ({ messages, loading, sendMessage, currentUser }) => {
   return (
-    <div className='h-100 d-flex flex-column py-5'>
+    <div className='chatbox d-flex flex-column border'>
       <Title loading={loading} />
-      <MessageList messages={messages}/>
+      <MessageList messages={messages} currentUser={currentUser}/>
       <FormInput sendMessage={sendMessage}/>
     </div>
   );

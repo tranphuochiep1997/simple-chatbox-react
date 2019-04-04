@@ -1,13 +1,15 @@
 import { AUTHENTICATE_SUCCESS } from '../../components/Auth/AuthAction';
 import { SOCKET_API } from '../../utils/config';
 import Storage from '../../utils/storage';
+import { toast } from 'react-toastify';
 import { 
   receiveMessage, 
   SEND_MESSAGE
 } from '../../components/Chat/ChatAction';
 
 const eventSocket = {
-  MESSAGE: 'message'
+  MESSAGE: 'message',
+  ERROR: 'error'
 }
 
 const createSocket = () => {
@@ -31,11 +33,16 @@ const socketIo = () => {
           store.dispatch(receiveMessage(message));
         });
 
+        socket.on(eventSocket.ERROR, (response) => {
+          response = JSON.parse(response);
+          toast.error(response.error.message);
+        });
+
         break;
       }
 
       case SEND_MESSAGE: {
-        socket.emit(eventSocket.MESSAGE);
+        socket.emit(eventSocket.MESSAGE, action.payload);
         break;
       }
       
