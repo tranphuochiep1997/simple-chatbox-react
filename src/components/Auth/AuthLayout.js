@@ -3,7 +3,7 @@ import { Container, Row, Col, Alert } from 'reactstrap';
 
 const AuthLayout = ({ children, errorMessage }) => {
   return (
-    <div className='app'>
+    <div className='app flex-row align-items-center'>
       <Container>
         <Row className='justify-content-center'>
           <Col md='auto'>

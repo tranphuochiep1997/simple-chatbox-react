@@ -7,6 +7,10 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+
+library.add(faPaperPlane);
 
 const Main = () => {
   return (

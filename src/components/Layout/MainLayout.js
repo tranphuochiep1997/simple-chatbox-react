@@ -5,7 +5,6 @@ import AppHeader from './AppHeader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logout } from '../Auth/AuthAction';
-import { Container } from 'reactstrap';
 
 const Loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
@@ -18,26 +17,24 @@ const MainLayout = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <div className='app'>
       <AppHeader onLogout={onLogout} user={props.user} />
-      <main className='main'>
-        <Container fluid>
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              {
-                routes.map((route, index) => {
-                  if (route.component) {
-                    return <Route key={index} exact={route.exact} path={route.path} component={route.component} />;
-                  }
+      <div className='app-body'>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            {
+              routes.map((route, index) => {
+                if (route.component) {
+                  return <Route key={index} exact={route.exact} path={route.path} component={route.component} />;
+                }
 
-                  return null;
-                })
-              }
-            </Switch>
-          </Suspense>
-        </Container>
-      </main>
-    </React.Fragment>
+                return null;
+              })
+            }
+          </Switch>
+        </Suspense>
+      </div>
+    </div>
   );
 }
 
