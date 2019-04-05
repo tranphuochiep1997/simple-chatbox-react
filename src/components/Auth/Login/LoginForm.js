@@ -3,7 +3,7 @@ import { FormGroup, Form, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import SpinnerButton from '../../SpinnerButton';
 
-const LoginForm = ({ login, clearLoginError, error, loading }) => {
+const LoginForm = ({ login, clearError, error, loading }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,14 +18,14 @@ const LoginForm = ({ login, clearLoginError, error, loading }) => {
   const onUserNameChange = (e) => {
     setUsername(e.target.value);
     if (error) {
-      clearLoginError();
+      clearError();
     }
   }
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
     if (error) {
-      clearLoginError();
+      clearError();
     }
   }
 

@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 import AuthLayout from '../AuthLayout';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, clearLoginError } from './LoginAction';
+import { login, clearError } from '../AuthAction';
 import { Redirect } from 'react-router-dom';
 
 const LoginContainer = (props) => {
@@ -11,10 +11,10 @@ const LoginContainer = (props) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
   useEffect(() => {
-    if (!props.loading && !props.authenticatedError && props.success) {
+    if (!props.loading && props.authenticated) {
       setRedirectToReferrer(true);
     }
-  }, [props.loading, props.success]);
+  }, [props.loading, props.authenticated]);
 
   const { from } = props.location.state || { from: { pathname: '/' } };
 
@@ -27,26 +27,25 @@ const LoginContainer = (props) => {
       <LoginForm
         login={props.login}
         loading={props.loading}
-        success={props.success}
+        authenticated={props.authenticated}
         error={props.error}
-        clearLoginError={props.clearLoginError} />
+        clearError={props.clearError} />
     </AuthLayout>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    loading: state.loginReducer.loading,
-    error: state.loginReducer.error,
-    authenticatedError: state.authReducer.error,
-    success: state.loginReducer.success
+    loading: state.authReducer.loading,
+    error: state.authReducer.error,
+    authenticated: state.authReducer.authenticated
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     login,
-    clearLoginError
+    clearError
   }, dispatch)
 }
 

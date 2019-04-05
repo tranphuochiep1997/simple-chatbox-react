@@ -3,6 +3,7 @@ import ChatBox from './ChatBox';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getListMessages, sendMessage } from './ChatAction';
+import { Container, Row, Col } from 'reactstrap';
 
 const ChatContainer = (props) => {
 
@@ -11,12 +12,18 @@ const ChatContainer = (props) => {
   }, []);
 
   return (
-    <ChatBox 
-      sendMessage={props.sendMessage} 
-      messages={props.messages} 
-      loading={props.loading} 
-      error={props.error}
-      currentUser={props.currentUser}/>
+    <Container>
+      <Row>
+        <Col>
+          <ChatBox
+            sendMessage={props.sendMessage}
+            messages={props.messages}
+            loading={props.loading}
+            error={props.error}
+            currentUser={props.currentUser} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
