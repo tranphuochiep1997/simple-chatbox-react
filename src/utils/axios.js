@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { SERVER_API } from './config';
+import { Env } from './config';
 import Storage from './storage';
 
-axios.defaults.baseURL = SERVER_API;
+axios.defaults.baseURL = Env.SERVER_API;
 axios.defaults.headers['Content-Type'] = 'application/json'
 
 /** Bind accessToken */

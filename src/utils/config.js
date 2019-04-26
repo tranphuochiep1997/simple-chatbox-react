@@ -1,2 +1,5 @@
-export const SERVER_API = 'http://localhost:2019/api';
-export const SOCKET_API = 'http://localhost:2019';
+export const Env = {
+ SERVER_API: process.env.REACT_APP_SERVER_API,
+ SOCKET_API: process.env.REACT_APP_SOCKET_API
+}
+

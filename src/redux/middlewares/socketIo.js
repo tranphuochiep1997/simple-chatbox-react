@@ -1,5 +1,5 @@
 import { AUTHENTICATE_SUCCESS } from '../../components/Auth/AuthAction';
-import { SOCKET_API } from '../../utils/config';
+import { Env } from '../../utils/config';
 import Storage from '../../utils/storage';
 import { toast } from 'react-toastify';
 import { 
@@ -14,7 +14,7 @@ const eventSocket = {
 
 const createSocket = () => {
   const io = require('socket.io-client');
-  return io(SOCKET_API, {
+  return io(Env.SOCKET_API, {
     query: {
       accessToken: Storage.getAccessToken()
     }
